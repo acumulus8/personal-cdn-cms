@@ -1,0 +1,42 @@
+{
+  "name": "personal-cdn-cms",
+  "version": "1.0.0",
+  "description": "CDN and backend CMS for my personal websites",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx prisma migrate deploy && node dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc && prisma generate",
+    "connectDb": "./cloud_sql_proxy tw-sites-cdn:us-central1:tw-sites-cdn --port=3306"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acumulus8/personal-cdn-cms.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/acumulus8/personal-cdn-cms/issues"
+  },
+  "homepage": "https://github.com/acumulus8/personal-cdn-cms#readme",
+  "prisma": {
+    "schema": "prisma/schema/schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/adapter-mariadb": "^7.4.0",
+    "@prisma/client": "^7.4.0",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.2.3",
+    "nodemon": "^3.1.11",
+    "prisma": "^7.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,135 @@
+model Project {
+    id          String   @id @default(uuid())
+    name        String   @unique
+    slug        String   @unique
+    type        ProjectType @default(WEBSITE)
+    status      ProjectStatus @default(ACTIVE)
+    description String?
+    clientId    String
+    client      Client   @relation(fields: [clientId], references: [id])
+    updatedAt   DateTime @updatedAt
+    createdAt   DateTime @default(now())
+
+    // Relations
+    sites       Site[]
+    mobileApps  MobileApp[]
+    apis        API[]
+    pages       Page[]
+    contents    Content[]
+    media       Media[]
+}
+
+enum ProjectType {
+    WEBSITE
+    MOBILE_APP
+    API
+    LIBRARY
+    OTHER
+}
+
+enum ProjectStatus {
+    ACTIVE
+    DRAFT
+    INACTIVE
+    ARCHIVED
+}
+
+model Client {
+    id          String   @id @default(uuid())
+    name        String   @unique
+    slug        String   @unique
+    description String?
+    projects    Project[]
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    // Relations
+    media       Media[]
+}
+
+model Site {
+    id          String   @id @default(uuid())
+    projectId   String
+    project     Project  @relation(fields: [projectId], references: [id])
+    name        String
+    domain      String   @unique
+    slug        String   @unique
+    host        String
+    pages       Page[]
+    description String?
+    type        SiteType @default(PORTFOLIO)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+enum SiteType {
+    PORTFOLIO
+    BLOG
+    ECOMMERCE
+    WEB_APP
+    OTHER
+}   
+
+model MobileApp {
+    id          String   @id @default(uuid())
+    projectId   String
+    project     Project  @relation(fields: [projectId], references: [id])
+    name        String
+    slug        String   @unique
+    description String?
+    platform    MobileAppPlatform @default(ANDROID)
+    type        MobileAppType @default(PORTFOLIO)
+    category    MobileAppCategory @default(GAMES)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+enum MobileAppPlatform {
+    IOS
+    IOS_ANDROID
+    IOS_WEB
+    ANDROID
+    ANDROID_IOS_WEB
+    ANDROID_WEB
+    OTHER
+}
+
+enum MobileAppType {
+    ECOMMERCE
+    PORTFOLIO
+    GAME
+    OTHER
+}
+
+enum MobileAppCategory {
+    GAMES
+    ENTERTAINMENT
+    PRODUCTIVITY
+    SOCIAL
+    UTILITIES
+    OTHER
+}
+
+model API {
+    id          String   @id @default(uuid())
+    projectId   String
+    project     Project  @relation(fields: [projectId], references: [id])
+    name        String
+    slug        String   @unique
+    description String?
+    type        APIType @default(CDN)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+enum APIType {
+    CDN
+    COMPONENT_LIBRARY
+    THEME_LIBRARY
+    CMS
+    ECOMMERCE
+    OTHER
+}
+
+    
+
