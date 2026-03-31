@@ -8,7 +8,7 @@
     "start": "npx prisma migrate deploy && node dist/index.js",
     "dev": "nodemon src/index.ts",
     "build": "tsc && prisma generate",
-    "connectDb": "./cloud_sql_proxy tw-sites-cdn:us-central1:tw-sites-cdn --port=3306"
+    "connectDb": "cloud_sql_proxy tw-sites-cdn:us-central1:tw-sites-cdn --port=3306"
   },
   "repository": {
     "type": "git",
