@@ -1,0 +1,8 @@
+$kind: collection
+name: TW Sites CMS CDN
+auth:
+  - id: 705d8698-3442-47d6-8ffc-0452937beae7
+    type: bearer
+    name: Bearer Token
+    credentials:
+      token: "{{TOKEN}}"

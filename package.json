@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx prisma migrate deploy && node dist/index.js",
-    "dev": "nodemon src/index.ts",
-    "build": "tsc && prisma generate",
+    "start": "npx prisma migrate deploy && node --experimental-specifier-resolution=node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc && npx prisma generate",
     "connectDb": "cloud_sql_proxy tw-sites-cdn:us-central1:tw-sites-cdn --port=3306"
   },
   "repository": {
@@ -23,19 +23,31 @@
   },
   "homepage": "https://github.com/acumulus8/personal-cdn-cms#readme",
   "prisma": {
-    "schema": "prisma/schema/schema.prisma"
+    "schema": "src/prisma/schema"
   },
   "dependencies": {
-    "@prisma/adapter-mariadb": "^7.4.0",
-    "@prisma/client": "^7.4.0",
+    "@apollo/server": "^5.5.0",
+    "@as-integrations/express5": "^1.1.2",
+    "@pothos/core": "^4.12.0",
+    "@pothos/plugin-prisma": "^4.14.3",
+    "@prisma/adapter-mariadb": "^7.6.0",
+    "@prisma/client": "^7.6.0",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.4",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "graphql": "^16.13.2",
+    "jsonwebtoken": "^9.0.3",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
+    "@apollo/rover": "^0.38.0",
+    "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.2.3",
     "nodemon": "^3.1.11",
-    "prisma": "^7.4.0",
+    "prisma": "^7.6.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }

@@ -1,0 +1,9 @@
+name: TW Sites CMS CDN - DEV
+values:
+  - key: JWT_SECRET
+    value: ''
+    enabled: true
+  - key: TOKEN
+    value: ''
+    enabled: true
+color: 120

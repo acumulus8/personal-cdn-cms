@@ -1,0 +1,22 @@
+$kind: http-request
+name: Clients - Create
+url: http://localhost:3000/clients/create
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name": "Tim Wilburn",
+        "email": "timwilburn8@gmail.com",
+        "phone": "5138861440",
+        "address": "3441 Laredo Drive, Unit 29",
+        "city": "Lexington",
+        "state": "Kentucky",
+        "zipCode": "40517",
+        "country": "US"
+    }
+auth:
+  type: inherit
+  credentials:
+    id: 705d8698-3442-47d6-8ffc-0452937beae7
+order: 4503271704635107

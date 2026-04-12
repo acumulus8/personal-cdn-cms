@@ -1,0 +1,22 @@
+$kind: graphql-request
+name: Pages for a Sight
+url: http://localhost:3000/graphql?siteId=1
+query: |
+  query PagesBySite {
+      pagesBySite(siteId: 1) {
+          id
+          keywords
+          metaDescription
+          metaTitle
+          ogImage
+          parentId
+          projectId
+          siteId
+          slug
+          title
+      }
+  }
+variables: ""
+schema:
+  source: auto
+order: 4503556339950289

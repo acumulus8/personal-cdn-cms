@@ -1,0 +1,74 @@
+$kind: graphql-request
+name: Client and Relationships
+url: localhost:3000/graphql
+query: |
+  query Client {
+      client(id: 1) {
+          description
+          email
+          id
+          name
+          phone
+          slug
+          addresses {
+              address1
+              address2
+              city
+              country
+              id
+              state
+              zipCode
+          }
+          projects {
+              clientId
+              description
+              id
+              name
+              slug
+              status
+              type
+              sites {
+                  createdAt
+                  description
+                  domain
+                  host
+                  id
+                  name
+                  projectId
+                  slug
+                  type
+                  updatedAt
+              }
+              mobileApps {
+                  category
+                  createdAt
+                  description
+                  id
+                  name
+                  platform
+                  projectId
+                  slug
+                  type
+                  updatedAt
+              }
+              apis {
+                  createdAt
+                  description
+                  id
+                  name
+                  projectId
+                  slug
+                  type
+                  updatedAt
+              }
+          }
+      }
+  }
+variables: ""
+auth:
+  type: inherit
+  credentials:
+    id: 705d8698-3442-47d6-8ffc-0452937beae7
+schema:
+  source: auto
+order: 4503551675374911

@@ -1,0 +1,7 @@
+$kind: http-request
+name: User - by ID
+url: http://localhost/auth/user?userId=1
+method: GET
+queryParams:
+  userId: "1"
+order: 3384650346307498
