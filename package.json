@@ -1,0 +1,10 @@
+{
+    "name": "personal-cdn-cms",
+    "private": true,
+    "workspaces": [
+        "apps/*"
+    ],
+    "scripts": {
+        "dev": "turbo run dev"
+    }
+}
