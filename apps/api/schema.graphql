@@ -1,0 +1,620 @@
+type API {
+  createdAt: String
+  description: String
+  id: Int
+  name: String
+  project: Project
+  projectId: Int
+  slug: String
+  type: String
+  updatedAt: String
+}
+
+enum APIType {
+  CDN
+  CMS
+  COMPONENT_LIBRARY
+  ECOMMERCE
+  OTHER
+  THEME_LIBRARY
+}
+
+type Address {
+  address1: String
+  address2: String
+  city: String
+  country: String
+  id: Int
+  state: String
+  zipCode: String
+}
+
+type Client {
+  addresses: [Address!]
+  description: String
+  email: String
+  id: Int
+  name: String
+  phone: String
+  projects: [Project!]
+  slug: String
+}
+
+enum ColumnLayout {
+  AUTO
+  EQUAL_QUARTERS
+  EQUAL_THIRDS
+  FULL
+  HALF_HALF
+  ONE_THIRD_TWO_THIRDS
+  TWO_THIRDS_ONE_THIRD
+}
+
+enum ContainerType {
+  COLUMN
+  FULL
+  GRID
+  ROW
+}
+
+type Content {
+  featuredMedia: Media
+  featuredMediaId: Int
+  id: Int
+  media: [ContentMedia!]
+  project: Project
+  projectId: Int
+  sectionContents: [SectionContent!]
+  slug: String
+  state: String
+  title: String
+  type: String
+  versions: [ContentVersion!]
+  visibility: String
+}
+
+type ContentMedia {
+  content: Content
+  contentId: Int
+  id: Int
+  media: Media
+  mediaId: Int
+  order: Int
+}
+
+enum ContentState {
+  ARCHIVED
+  DRAFT
+  PUBLISHED
+}
+
+enum ContentType {
+  ALBUM
+  OTHER
+  POST
+  TEXT
+}
+
+type ContentVersion {
+  body: String
+  content: Content
+  contentId: Int
+  excerpt: String
+  id: Int
+  media: [ContentVersionMedia!]
+  state: String
+  title: String
+  version: Int
+  visibility: String
+}
+
+type ContentVersionMedia {
+  contentVersion: ContentVersion
+  contentVersionId: Int
+  media: Media
+  mediaId: Int
+  order: Int
+}
+
+enum ContentVisibility {
+  HIDDEN
+  PASSWORD_PROTECTED
+  VISIBLE
+}
+
+input CreateAPIInput {
+  description: String
+  name: String!
+  projectId: Int!
+  slug: String!
+  type: APIType
+}
+
+input CreateClientAddressInput {
+  address1: String!
+  address2: String
+  city: String!
+  clientId: Int!
+  country: String!
+  state: String!
+  zipCode: String!
+}
+
+input CreateClientInput {
+  description: String
+  email: String!
+  name: String!
+  phone: String!
+  slug: String!
+}
+
+input CreateContentInput {
+  featuredMediaId: Int
+  projectId: Int!
+  slug: String
+  state: ContentState
+  title: String
+  type: ContentType
+  visibility: ContentVisibility
+}
+
+input CreateContentMediaInput {
+  contentId: Int!
+  mediaId: Int!
+  order: Int
+}
+
+input CreateContentVersionInput {
+  body: String
+  contentId: Int!
+  excerpt: String
+  state: ContentState
+  title: String
+  visibility: ContentVisibility
+}
+
+input CreateContentVersionMediaInput {
+  contentVersionId: Int!
+  mediaId: Int!
+  order: Int
+}
+
+input CreateMediaInput {
+  altText: String
+  caption: String
+  filename: String
+  height: Int
+  mimeType: String
+  ownerId: Int!
+  projectId: Int!
+  size: Int
+  type: MediaType
+  url: String!
+  width: Int
+}
+
+input CreateMobileAppInput {
+  category: MobileAppCategory
+  description: String
+  name: String!
+  platform: MobileAppPlatform
+  projectId: Int!
+  slug: String!
+  type: MobileAppType
+}
+
+input CreatePageInput {
+  keywords: String
+  metaDescription: String
+  metaTitle: String
+  ogImage: String
+  parentId: Int
+  projectId: Int!
+  siteId: Int!
+  slug: String!
+  title: String!
+}
+
+input CreateProjectInput {
+  clientId: Int!
+  description: String
+  name: String!
+  slug: String!
+  status: ProjectStatus!
+  type: ProjectType!
+}
+
+input CreateSectionContentInput {
+  contentId: Int!
+  sectionId: Int!
+  type: SectionContentType
+}
+
+input CreateSectionInput {
+  columnLayout: ColumnLayout
+  containerType: ContainerType
+  name: String
+  order: Int
+  pageId: Int!
+  parentId: Int
+  type: SectionType!
+}
+
+input CreateSiteInput {
+  clientId: Int!
+  description: String
+  domain: String!
+  host: String!
+  name: String!
+  projectId: Int!
+  slug: String!
+  type: SiteType
+}
+
+type Media {
+  altText: String
+  caption: String
+  contentMedia: [ContentMedia!]
+  contentVersions: [ContentVersionMedia!]
+  featuredIn: [Content!]
+  filename: String
+  height: Int
+  id: Int
+  mimeType: String
+  owner: Client
+  ownerId: Int
+  project: Project
+  projectId: Int
+  size: Int
+  type: String
+  url: String
+  width: Int
+}
+
+enum MediaType {
+  ARCHIVE
+  AUDIO
+  DOCUMENT
+  IMAGE
+  OTHER
+  VIDEO
+}
+
+type MobileApp {
+  category: String
+  createdAt: String
+  description: String
+  id: Int
+  name: String
+  pages: [Page!]
+  platform: String
+  project: Project
+  projectId: Int
+  slug: String
+  type: String
+  updatedAt: String
+}
+
+enum MobileAppCategory {
+  ENTERTAINMENT
+  GAMES
+  OTHER
+  PRODUCTIVITY
+  SOCIAL
+  UTILITIES
+}
+
+enum MobileAppPlatform {
+  ANDROID
+  ANDROID_IOS_WEB
+  ANDROID_WEB
+  IOS
+  IOS_ANDROID
+  IOS_WEB
+  OTHER
+}
+
+enum MobileAppType {
+  ECOMMERCE
+  GAME
+  OTHER
+  PORTFOLIO
+}
+
+type Mutation {
+  createAPI(input: CreateAPIInput!): API
+  createClient(input: CreateClientInput!): Client
+  createClientAddress(input: CreateClientAddressInput!): Address
+  createContent(input: CreateContentInput!): Content
+  createContentMedia(input: CreateContentMediaInput!): ContentMedia
+  createContentVersion(input: CreateContentVersionInput!): ContentVersion
+  createContentVersionMedia(input: CreateContentVersionMediaInput!): ContentVersionMedia
+  createMedia(input: CreateMediaInput!): Media
+  createMobileApp(input: CreateMobileAppInput!): MobileApp
+  createPage(input: CreatePageInput!): Page
+  createProject(input: CreateProjectInput!): Project
+  createSection(input: CreateSectionInput!): Section
+  createSectionContent(input: CreateSectionContentInput!): SectionContent
+  createSite(input: CreateSiteInput!): Site!
+  deleteAPI(id: Int!): API
+  deleteAddress(id: Int!): Address
+  deleteClient(id: Int!): Client
+  deleteContent(id: Int!): Content
+  deleteContentMedia(id: Int!): ContentMedia
+  deleteContentVersion(id: Int!): ContentVersion
+  deleteContentVersionMedia(contentVersionId: Int!, mediaId: Int!): ContentVersionMedia
+  deleteMedia(id: Int!): Media
+  deleteMobileApp(id: Int!): MobileApp
+  deletePage(id: Int!): Page
+  deleteProject(id: Int!): Project
+  deleteSection(id: Int!): Section
+  deleteSectionContent(id: Int!): SectionContent
+  deleteSite(id: Int!): Site
+  updateAPI(id: Int!, input: UpdateAPIInput!): API
+  updateAddress(id: Int!, input: UpdateAddressInput!): Address
+  updateClient(id: Int!, input: UpdateClientInput!): Client
+  updateContent(id: Int!, input: UpdateContentInput!): Content
+  updateContentMediaOrder(id: Int!, order: Int!): ContentMedia
+  updateContentVersion(id: Int!, input: UpdateContentVersionInput!): ContentVersion
+  updateContentVersionMediaOrder(contentVersionId: Int!, mediaId: Int!, order: Int!): ContentVersionMedia
+  updateMedia(id: Int!, input: UpdateMediaInput!): Media
+  updateMobileApp(id: Int!, input: UpdateMobileAppInput!): MobileApp
+  updatePage(id: Int!, input: UpdatePageInput!): Page
+  updateProject(id: Int!, input: UpdateProjectInput!): Project
+  updateSection(id: Int!, input: UpdateSectionInput!): Section
+  updateSectionContent(id: Int!, input: UpdateSectionContentInput!): SectionContent
+  updateSite(id: Int!, input: UpdateSiteInput!): Site
+}
+
+type Page {
+  id: Int
+  keywords: String
+  metaDescription: String
+  metaTitle: String
+  ogImage: String
+  parentId: Int
+  parentPage: Page
+  project: Project
+  projectId: Int
+  sections: [Section!]
+  site: Site
+  siteId: Int
+  slug: String
+  subPages: [Page!]
+  title: String
+}
+
+type Project {
+  apis: [API!]
+  clientId: Int
+  description: String
+  id: Int
+  mobileApps: [MobileApp!]
+  name: String
+  sites: [Site!]
+  slug: String
+  status: String
+  type: String
+}
+
+enum ProjectStatus {
+  ACTIVE
+  ARCHIVED
+  DRAFT
+  INACTIVE
+}
+
+enum ProjectType {
+  API
+  LIBRARY
+  MOBILE_APP
+  OTHER
+  WEBSITE
+}
+
+type Query {
+  address(id: Int!): Address
+  addresses(clientId: Int): [Address!]
+  api(id: Int!): API
+  apis(projectId: Int): [API!]
+  client(id: Int!): Client
+  clients: [Client!]
+  content(id: Int!): Content
+  contentMedia(id: Int!): ContentMedia
+  contentMedias(contentId: Int): [ContentMedia!]
+  contentVersion(id: Int!): ContentVersion
+  contentVersionMedia(contentVersionId: Int!, mediaId: Int!): ContentVersionMedia
+  contentVersionMedias(contentVersionId: Int): [ContentVersionMedia!]
+  contentVersions(contentId: Int): [ContentVersion!]
+  contents(projectId: Int): [Content!]
+  media(id: Int!): Media
+  medias(projectId: Int): [Media!]
+  mobileApp(id: Int!): MobileApp
+  mobileApps(projectId: Int): [MobileApp!]
+  page(id: Int!): Page
+  pages: [Page!]
+  pagesBySite(siteId: Int!): [Page!]
+  project(id: Int!): Project
+  projects: [Project!]
+  section(id: Int!): Section
+  sectionContent(id: Int!): SectionContent
+  sectionContents(sectionId: Int): [SectionContent!]
+  sections(pageId: Int): [Section!]
+  site(id: Int!): Site
+  sites: [Site!]
+}
+
+type Section {
+  columnLayout: String
+  containerType: String
+  id: Int
+  name: String
+  order: Int
+  page: Page
+  pageId: Int
+  parentId: Int
+  parentSection: Section
+  sectionContent: [SectionContent!]
+  subSections: [Section!]
+  type: String
+}
+
+type SectionContent {
+  content: Content
+  contentId: Int
+  id: Int
+  section: Section
+  sectionId: Int
+  type: String
+}
+
+enum SectionContentType {
+  ARCHIVE
+  AUDIO
+  DOCUMENT
+  IMAGE
+  OTHER
+  TEXT
+  VIDEO
+}
+
+enum SectionType {
+  BACKGROUND_IMAGE
+  BACKGROUND_VIDEO
+  BANNER
+  CONTACT
+  CTA
+  GALLERY
+  GALLERY_ITEM
+  GRID
+  GRID_ITEM
+  HERO
+  IMG_1_3_TXT_2_3
+  LIST
+  LIST_ITEM
+  OTHER
+  TESTIMONIAL
+  TXT_2_3_IMG_1_3
+}
+
+type Site {
+  description: String
+  domain: String
+  host: String
+  id: Int
+  name: String
+  pages: [Page!]
+  projectId: Int
+  slug: String
+  type: String
+}
+
+enum SiteType {
+  BLOG
+  ECOMMERCE
+  OTHER
+  PORTFOLIO
+  WEB_APP
+}
+
+input UpdateAPIInput {
+  description: String
+  name: String
+  slug: String
+  type: APIType
+}
+
+input UpdateAddressInput {
+  address1: String
+  address2: String
+  city: String
+  country: String
+  state: String
+  zipCode: String
+}
+
+input UpdateClientInput {
+  description: String
+  email: String
+  name: String
+  phone: String
+  slug: String
+}
+
+input UpdateContentInput {
+  featuredMediaId: Int
+  slug: String
+  state: ContentState
+  title: String
+  type: ContentType
+  visibility: ContentVisibility
+}
+
+input UpdateContentVersionInput {
+  body: String
+  excerpt: String
+  state: ContentState
+  title: String
+  visibility: ContentVisibility
+}
+
+input UpdateMediaInput {
+  altText: String
+  caption: String
+  filename: String
+  height: Int
+  mimeType: String
+  size: Int
+  type: MediaType
+  url: String
+  width: Int
+}
+
+input UpdateMobileAppInput {
+  category: MobileAppCategory
+  description: String
+  name: String
+  platform: MobileAppPlatform
+  slug: String
+  type: MobileAppType
+}
+
+input UpdatePageInput {
+  keywords: String
+  metaDescription: String
+  metaTitle: String
+  ogImage: String
+  parentId: Int
+  slug: String
+  title: String
+}
+
+input UpdateProjectInput {
+  description: String
+  name: String
+  slug: String
+  status: ProjectStatus
+  type: ProjectType
+}
+
+input UpdateSectionContentInput {
+  type: SectionContentType!
+}
+
+input UpdateSectionInput {
+  columnLayout: ColumnLayout
+  containerType: ContainerType
+  name: String
+  order: Int
+  parentId: Int
+  type: SectionType
+}
+
+input UpdateSiteInput {
+  description: String
+  domain: String
+  host: String
+  name: String
+  slug: String
+  type: SiteType
+}

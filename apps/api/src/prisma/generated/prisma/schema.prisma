@@ -1,0 +1,413 @@
+model Address {
+  id       Int      @id @default(autoincrement())
+  address1 String   @unique
+  address2 String
+  city     String
+  state    String
+  zipCode  String
+  country  String
+  clients  Client[]
+}
+
+model Client {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  slug        String   @unique
+  email       String   @unique
+  phone       String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  addresses Address[]
+  media     Media[]
+  projects  Project[]
+}
+
+model Page {
+  id    Int    @id @default(autoincrement())
+  title String
+  slug  String // e.g., "about-me"
+
+  // Relations
+  projectId   Int
+  project     Project    @relation(fields: [projectId], references: [id])
+  siteId      Int?
+  site        Site?      @relation(fields: [siteId], references: [id])
+  mobileAppId Int?
+  mobileApp   MobileApp? @relation(fields: [mobileAppId], references: [id])
+
+  // Sections and Sub and Parent Pages relationships
+  sections   Section[]
+  subPages   Page[]    @relation("SubPages")
+  parentId   Int?
+  parentPage Page?     @relation("SubPages", fields: [parentId], references: [id])
+
+  // SEO Fields
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  keywords        String?
+
+  @@unique([slug, projectId]) // Ensures "home" can exist on both sites
+}
+
+model Section {
+  id             Int              @id @default(autoincrement())
+  type           SectionType
+  name           String?
+  sectionContent SectionContent[]
+  order          Int              @default(0)
+  pageId         Int
+  page           Page             @relation(fields: [pageId], references: [id])
+
+  // Layout Options
+  containerType ContainerType @default(FULL)
+  columnLayout  ColumnLayout?
+  parentId      Int?
+  parentSection Section?      @relation("SubSections", fields: [parentId], references: [id])
+  subSections   Section[]     @relation("SubSections")
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+enum SectionType {
+  HERO
+  BACKGROUND_IMAGE
+  BACKGROUND_VIDEO
+  IMG_1_3_TXT_2_3
+  TXT_2_3_IMG_1_3
+  LIST
+  LIST_ITEM
+  GRID
+  GRID_ITEM
+  GALLERY
+  GALLERY_ITEM
+  BANNER
+  CONTACT
+  CTA
+  TESTIMONIAL
+  OTHER
+}
+
+model SectionContent {
+  id        Int                @id @default(autoincrement())
+  type      SectionContentType @default(TEXT)
+  contentId Int
+  content   Content            @relation(fields: [contentId], references: [id])
+  sectionId Int
+  section   Section            @relation(fields: [sectionId], references: [id])
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+}
+
+enum SectionContentType {
+  TEXT
+  IMAGE
+  VIDEO
+  AUDIO
+  DOCUMENT
+  ARCHIVE
+  OTHER
+}
+
+enum ContainerType {
+  ROW
+  COLUMN
+  GRID
+  FULL
+}
+
+enum ColumnLayout {
+  ONE_THIRD_TWO_THIRDS
+  TWO_THIRDS_ONE_THIRD
+  HALF_HALF
+  EQUAL_THIRDS
+  EQUAL_QUARTERS
+  FULL
+  AUTO
+}
+
+model Content {
+  id         Int               @id @default(autoincrement())
+  type       ContentType       @default(POST)
+  state      ContentState      @default(DRAFT)
+  visibility ContentVisibility @default(HIDDEN)
+
+  // Core metadata
+  slug  String?
+  title String?
+
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id])
+
+  versions ContentVersion[]
+
+  // Relations
+  sectionContents SectionContent[]
+  media           ContentMedia[]
+
+  featuredMediaId Int?
+  featuredMedia   Media? @relation("FeaturedMedia", fields: [featuredMediaId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ContentType {
+  POST
+  ALBUM
+  TEXT
+  OTHER
+}
+
+model ContentVersion {
+  id        Int     @id @default(autoincrement())
+  contentId Int
+  content   Content @relation(fields: [contentId], references: [id])
+  version   Int     @default(1) // Changed to Int for easier incrementing
+
+  // The actual data snapshot
+  title   String?
+  body    Json? // Flexible rich text structure
+  excerpt String?
+
+  state      ContentState      @default(DRAFT)
+  visibility ContentVisibility @default(HIDDEN)
+
+  // Relations
+  media ContentVersionMedia[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([contentId, version])
+}
+
+model ContentVersionMedia {
+  contentVersionId Int
+  contentVersion   ContentVersion @relation(fields: [contentVersionId], references: [id])
+  mediaId          Int
+  media            Media          @relation(fields: [mediaId], references: [id])
+  order            Int            @default(0)
+
+  @@id([contentVersionId, mediaId])
+}
+
+model ContentMedia {
+  id        Int     @id @default(autoincrement())
+  contentId Int
+  content   Content @relation(fields: [contentId], references: [id])
+  mediaId   Int
+  media     Media   @relation(fields: [mediaId], references: [id])
+  order     Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([contentId, mediaId])
+}
+
+enum ContentState {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ContentVisibility {
+  HIDDEN
+  VISIBLE
+  PASSWORD_PROTECTED
+}
+
+model Media {
+  id      Int       @id @default(autoincrement())
+  type    MediaType @default(IMAGE)
+  ownerId Int
+  owner   Client    @relation(fields: [ownerId], references: [id])
+
+  // File details
+  url      String
+  filename String?
+  mimeType String?
+  size     Int? // In bytes
+  width    Int? // For images/videos
+  height   Int? // For images/videos
+
+  altText String?
+  caption String?
+
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id])
+
+  // Relations
+  contentVersions ContentVersionMedia[]
+  contentMedia    ContentMedia[]
+  featuredIn      Content[]             @relation("FeaturedMedia")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  AUDIO
+  DOCUMENT
+  ARCHIVE
+  OTHER
+}
+
+model Project {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  slug        String        @unique
+  type        ProjectType   @default(WEBSITE)
+  status      ProjectStatus @default(ACTIVE)
+  description String?
+  clientId    Int
+  updatedAt   DateTime      @updatedAt
+  createdAt   DateTime      @default(now())
+
+  // Relations
+  client     Client      @relation(fields: [clientId], references: [id])
+  sites      Site[]
+  mobileApps MobileApp[]
+  apis       API[]
+  media      Media[]
+  pages      Page[]
+  contents   Content[]
+}
+
+enum ProjectType {
+  WEBSITE
+  MOBILE_APP
+  API
+  LIBRARY
+  OTHER
+}
+
+enum ProjectStatus {
+  ACTIVE
+  DRAFT
+  INACTIVE
+  ARCHIVED
+}
+
+model Site {
+  id          Int      @id @default(autoincrement())
+  projectId   Int
+  project     Project  @relation(fields: [projectId], references: [id])
+  name        String
+  domain      String   @unique
+  slug        String   @unique
+  host        String
+  pages       Page[]
+  description String?
+  type        SiteType @default(PORTFOLIO)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum SiteType {
+  PORTFOLIO
+  BLOG
+  ECOMMERCE
+  WEB_APP
+  OTHER
+}
+
+model MobileApp {
+  id          Int               @id @default(autoincrement())
+  projectId   Int
+  project     Project           @relation(fields: [projectId], references: [id])
+  name        String
+  slug        String            @unique
+  pages       Page[]
+  description String?
+  platform    MobileAppPlatform @default(ANDROID)
+  type        MobileAppType     @default(PORTFOLIO)
+  category    MobileAppCategory @default(GAMES)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+enum MobileAppPlatform {
+  IOS
+  IOS_ANDROID
+  IOS_WEB
+  ANDROID
+  ANDROID_IOS_WEB
+  ANDROID_WEB
+  OTHER
+}
+
+enum MobileAppType {
+  ECOMMERCE
+  PORTFOLIO
+  GAME
+  OTHER
+}
+
+enum MobileAppCategory {
+  GAMES
+  ENTERTAINMENT
+  PRODUCTIVITY
+  SOCIAL
+  UTILITIES
+  OTHER
+}
+
+model API {
+  id          Int      @id @default(autoincrement())
+  projectId   Int
+  project     Project  @relation(fields: [projectId], references: [id])
+  name        String
+  slug        String   @unique
+  description String?
+  type        APIType  @default(CDN)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum APIType {
+  CDN
+  COMPONENT_LIBRARY
+  THEME_LIBRARY
+  CMS
+  ECOMMERCE
+  OTHER
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+generator pothos {
+  provider     = "prisma-pothos-types"
+  clientOutput = "./generated/prisma"
+  output       = "../pothos-types.ts"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum UserRole {
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  firstName String
+  lastName  String
+  password  String
+  role      UserRole
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
