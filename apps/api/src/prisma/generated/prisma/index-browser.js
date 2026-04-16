@@ -147,12 +147,12 @@ exports.Prisma.PageScalarFieldEnum = {
   slug: 'slug',
   projectId: 'projectId',
   siteId: 'siteId',
+  mobileAppId: 'mobileAppId',
   parentId: 'parentId',
   metaTitle: 'metaTitle',
   metaDescription: 'metaDescription',
   ogImage: 'ogImage',
-  keywords: 'keywords',
-  mobileAppId: 'mobileAppId'
+  keywords: 'keywords'
 };
 
 exports.Prisma.SectionScalarFieldEnum = {

@@ -52,9 +52,9 @@ builder.queryField('content', (t) =>
     })
 );
 
-const ContentTypeEnum = builder.enumType('ContentType', { values: Object.values(ContentType) });
-const ContentStateEnum = builder.enumType('ContentState', { values: Object.values(ContentState) });
-const ContentVisibilityEnum = builder.enumType('ContentVisibility', { values: Object.values(ContentVisibility) });
+export const ContentTypeEnum = builder.enumType('ContentType', { values: Object.values(ContentType) });
+export const ContentStateEnum = builder.enumType('ContentState', { values: Object.values(ContentState) });
+export const ContentVisibilityEnum = builder.enumType('ContentVisibility', { values: Object.values(ContentVisibility) });
 
 const CreateContentInput = builder.inputType('CreateContentInput', {
     fields: (t) => ({

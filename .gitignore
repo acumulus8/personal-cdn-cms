@@ -142,3 +142,7 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 /generated/prisma
+
+.turbo
+/apps/api/.turbo
+/apps/web/.turbo

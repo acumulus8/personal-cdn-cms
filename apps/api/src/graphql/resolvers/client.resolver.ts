@@ -24,7 +24,7 @@ builder.prismaObject('Client', {
         phone: t.exposeString('phone'),
         description: t.exposeString('description', { nullable: true }),
         projects: t.relation('projects'),
-        addresses: t.relation('address'),
+        addresses: t.relation('addresses'),
     }),
 });
 

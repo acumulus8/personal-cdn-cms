@@ -4816,16 +4816,16 @@ export namespace Prisma {
     id: number | null
     projectId: number | null
     siteId: number | null
-    parentId: number | null
     mobileAppId: number | null
+    parentId: number | null
   }
 
   export type PageSumAggregateOutputType = {
     id: number | null
     projectId: number | null
     siteId: number | null
-    parentId: number | null
     mobileAppId: number | null
+    parentId: number | null
   }
 
   export type PageMinAggregateOutputType = {
@@ -4834,12 +4834,12 @@ export namespace Prisma {
     slug: string | null
     projectId: number | null
     siteId: number | null
+    mobileAppId: number | null
     parentId: number | null
     metaTitle: string | null
     metaDescription: string | null
     ogImage: string | null
     keywords: string | null
-    mobileAppId: number | null
   }
 
   export type PageMaxAggregateOutputType = {
@@ -4848,12 +4848,12 @@ export namespace Prisma {
     slug: string | null
     projectId: number | null
     siteId: number | null
+    mobileAppId: number | null
     parentId: number | null
     metaTitle: string | null
     metaDescription: string | null
     ogImage: string | null
     keywords: string | null
-    mobileAppId: number | null
   }
 
   export type PageCountAggregateOutputType = {
@@ -4862,12 +4862,12 @@ export namespace Prisma {
     slug: number
     projectId: number
     siteId: number
+    mobileAppId: number
     parentId: number
     metaTitle: number
     metaDescription: number
     ogImage: number
     keywords: number
-    mobileAppId: number
     _all: number
   }
 
@@ -4876,16 +4876,16 @@ export namespace Prisma {
     id?: true
     projectId?: true
     siteId?: true
-    parentId?: true
     mobileAppId?: true
+    parentId?: true
   }
 
   export type PageSumAggregateInputType = {
     id?: true
     projectId?: true
     siteId?: true
-    parentId?: true
     mobileAppId?: true
+    parentId?: true
   }
 
   export type PageMinAggregateInputType = {
@@ -4894,12 +4894,12 @@ export namespace Prisma {
     slug?: true
     projectId?: true
     siteId?: true
+    mobileAppId?: true
     parentId?: true
     metaTitle?: true
     metaDescription?: true
     ogImage?: true
     keywords?: true
-    mobileAppId?: true
   }
 
   export type PageMaxAggregateInputType = {
@@ -4908,12 +4908,12 @@ export namespace Prisma {
     slug?: true
     projectId?: true
     siteId?: true
+    mobileAppId?: true
     parentId?: true
     metaTitle?: true
     metaDescription?: true
     ogImage?: true
     keywords?: true
-    mobileAppId?: true
   }
 
   export type PageCountAggregateInputType = {
@@ -4922,12 +4922,12 @@ export namespace Prisma {
     slug?: true
     projectId?: true
     siteId?: true
+    mobileAppId?: true
     parentId?: true
     metaTitle?: true
     metaDescription?: true
     ogImage?: true
     keywords?: true
-    mobileAppId?: true
     _all?: true
   }
 
@@ -5022,13 +5022,13 @@ export namespace Prisma {
     title: string
     slug: string
     projectId: number
-    siteId: number
+    siteId: number | null
+    mobileAppId: number | null
     parentId: number | null
     metaTitle: string | null
     metaDescription: string | null
     ogImage: string | null
     keywords: string | null
-    mobileAppId: number | null
     _count: PageCountAggregateOutputType | null
     _avg: PageAvgAggregateOutputType | null
     _sum: PageSumAggregateOutputType | null
@@ -5056,18 +5056,18 @@ export namespace Prisma {
     slug?: boolean
     projectId?: boolean
     siteId?: boolean
+    mobileAppId?: boolean
     parentId?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
     ogImage?: boolean
     keywords?: boolean
-    mobileAppId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
-    site?: boolean | SiteDefaultArgs<ExtArgs>
+    site?: boolean | Page$siteArgs<ExtArgs>
+    mobileApp?: boolean | Page$mobileAppArgs<ExtArgs>
     sections?: boolean | Page$sectionsArgs<ExtArgs>
     subPages?: boolean | Page$subPagesArgs<ExtArgs>
     parentPage?: boolean | Page$parentPageArgs<ExtArgs>
-    mobileApp?: boolean | Page$mobileAppArgs<ExtArgs>
     _count?: boolean | PageCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["page"]>
 
@@ -5079,22 +5079,22 @@ export namespace Prisma {
     slug?: boolean
     projectId?: boolean
     siteId?: boolean
+    mobileAppId?: boolean
     parentId?: boolean
     metaTitle?: boolean
     metaDescription?: boolean
     ogImage?: boolean
     keywords?: boolean
-    mobileAppId?: boolean
   }
 
-  export type PageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "projectId" | "siteId" | "parentId" | "metaTitle" | "metaDescription" | "ogImage" | "keywords" | "mobileAppId", ExtArgs["result"]["page"]>
+  export type PageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "projectId" | "siteId" | "mobileAppId" | "parentId" | "metaTitle" | "metaDescription" | "ogImage" | "keywords", ExtArgs["result"]["page"]>
   export type PageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
-    site?: boolean | SiteDefaultArgs<ExtArgs>
+    site?: boolean | Page$siteArgs<ExtArgs>
+    mobileApp?: boolean | Page$mobileAppArgs<ExtArgs>
     sections?: boolean | Page$sectionsArgs<ExtArgs>
     subPages?: boolean | Page$subPagesArgs<ExtArgs>
     parentPage?: boolean | Page$parentPageArgs<ExtArgs>
-    mobileApp?: boolean | Page$mobileAppArgs<ExtArgs>
     _count?: boolean | PageCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -5102,24 +5102,24 @@ export namespace Prisma {
     name: "Page"
     objects: {
       project: Prisma.$ProjectPayload<ExtArgs>
-      site: Prisma.$SitePayload<ExtArgs>
+      site: Prisma.$SitePayload<ExtArgs> | null
+      mobileApp: Prisma.$MobileAppPayload<ExtArgs> | null
       sections: Prisma.$SectionPayload<ExtArgs>[]
       subPages: Prisma.$PagePayload<ExtArgs>[]
       parentPage: Prisma.$PagePayload<ExtArgs> | null
-      mobileApp: Prisma.$MobileAppPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       title: string
       slug: string
       projectId: number
-      siteId: number
+      siteId: number | null
+      mobileAppId: number | null
       parentId: number | null
       metaTitle: string | null
       metaDescription: string | null
       ogImage: string | null
       keywords: string | null
-      mobileAppId: number | null
     }, ExtArgs["result"]["page"]>
     composites: {}
   }
@@ -5461,11 +5461,11 @@ export namespace Prisma {
   export interface Prisma__PageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    site<T extends SiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SiteDefaultArgs<ExtArgs>>): Prisma__SiteClient<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    site<T extends Page$siteArgs<ExtArgs> = {}>(args?: Subset<T, Page$siteArgs<ExtArgs>>): Prisma__SiteClient<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    mobileApp<T extends Page$mobileAppArgs<ExtArgs> = {}>(args?: Subset<T, Page$mobileAppArgs<ExtArgs>>): Prisma__MobileAppClient<$Result.GetResult<Prisma.$MobileAppPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     sections<T extends Page$sectionsArgs<ExtArgs> = {}>(args?: Subset<T, Page$sectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     subPages<T extends Page$subPagesArgs<ExtArgs> = {}>(args?: Subset<T, Page$subPagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     parentPage<T extends Page$parentPageArgs<ExtArgs> = {}>(args?: Subset<T, Page$parentPageArgs<ExtArgs>>): Prisma__PageClient<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    mobileApp<T extends Page$mobileAppArgs<ExtArgs> = {}>(args?: Subset<T, Page$mobileAppArgs<ExtArgs>>): Prisma__MobileAppClient<$Result.GetResult<Prisma.$MobileAppPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5500,12 +5500,12 @@ export namespace Prisma {
     readonly slug: FieldRef<"Page", 'String'>
     readonly projectId: FieldRef<"Page", 'Int'>
     readonly siteId: FieldRef<"Page", 'Int'>
+    readonly mobileAppId: FieldRef<"Page", 'Int'>
     readonly parentId: FieldRef<"Page", 'Int'>
     readonly metaTitle: FieldRef<"Page", 'String'>
     readonly metaDescription: FieldRef<"Page", 'String'>
     readonly ogImage: FieldRef<"Page", 'String'>
     readonly keywords: FieldRef<"Page", 'String'>
-    readonly mobileAppId: FieldRef<"Page", 'Int'>
   }
     
 
@@ -5854,6 +5854,44 @@ export namespace Prisma {
   }
 
   /**
+   * Page.site
+   */
+  export type Page$siteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Site
+     */
+    select?: SiteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Site
+     */
+    omit?: SiteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SiteInclude<ExtArgs> | null
+    where?: SiteWhereInput
+  }
+
+  /**
+   * Page.mobileApp
+   */
+  export type Page$mobileAppArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MobileApp
+     */
+    select?: MobileAppSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MobileApp
+     */
+    omit?: MobileAppOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MobileAppInclude<ExtArgs> | null
+    where?: MobileAppWhereInput
+  }
+
+  /**
    * Page.sections
    */
   export type Page$sectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5918,25 +5956,6 @@ export namespace Prisma {
      */
     include?: PageInclude<ExtArgs> | null
     where?: PageWhereInput
-  }
-
-  /**
-   * Page.mobileApp
-   */
-  export type Page$mobileAppArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MobileApp
-     */
-    select?: MobileAppSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MobileApp
-     */
-    omit?: MobileAppOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MobileAppInclude<ExtArgs> | null
-    where?: MobileAppWhereInput
   }
 
   /**
@@ -18698,12 +18717,12 @@ export namespace Prisma {
     slug: 'slug',
     projectId: 'projectId',
     siteId: 'siteId',
+    mobileAppId: 'mobileAppId',
     parentId: 'parentId',
     metaTitle: 'metaTitle',
     metaDescription: 'metaDescription',
     ogImage: 'ogImage',
-    keywords: 'keywords',
-    mobileAppId: 'mobileAppId'
+    keywords: 'keywords'
   };
 
   export type PageScalarFieldEnum = (typeof PageScalarFieldEnum)[keyof typeof PageScalarFieldEnum]
@@ -19360,19 +19379,19 @@ export namespace Prisma {
     title?: StringFilter<"Page"> | string
     slug?: StringFilter<"Page"> | string
     projectId?: IntFilter<"Page"> | number
-    siteId?: IntFilter<"Page"> | number
+    siteId?: IntNullableFilter<"Page"> | number | null
+    mobileAppId?: IntNullableFilter<"Page"> | number | null
     parentId?: IntNullableFilter<"Page"> | number | null
     metaTitle?: StringNullableFilter<"Page"> | string | null
     metaDescription?: StringNullableFilter<"Page"> | string | null
     ogImage?: StringNullableFilter<"Page"> | string | null
     keywords?: StringNullableFilter<"Page"> | string | null
-    mobileAppId?: IntNullableFilter<"Page"> | number | null
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
-    site?: XOR<SiteScalarRelationFilter, SiteWhereInput>
+    site?: XOR<SiteNullableScalarRelationFilter, SiteWhereInput> | null
+    mobileApp?: XOR<MobileAppNullableScalarRelationFilter, MobileAppWhereInput> | null
     sections?: SectionListRelationFilter
     subPages?: PageListRelationFilter
     parentPage?: XOR<PageNullableScalarRelationFilter, PageWhereInput> | null
-    mobileApp?: XOR<MobileAppNullableScalarRelationFilter, MobileAppWhereInput> | null
   }
 
   export type PageOrderByWithRelationInput = {
@@ -19380,19 +19399,19 @@ export namespace Prisma {
     title?: SortOrder
     slug?: SortOrder
     projectId?: SortOrder
-    siteId?: SortOrder
+    siteId?: SortOrderInput | SortOrder
+    mobileAppId?: SortOrderInput | SortOrder
     parentId?: SortOrderInput | SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDescription?: SortOrderInput | SortOrder
     ogImage?: SortOrderInput | SortOrder
     keywords?: SortOrderInput | SortOrder
-    mobileAppId?: SortOrderInput | SortOrder
     project?: ProjectOrderByWithRelationInput
     site?: SiteOrderByWithRelationInput
+    mobileApp?: MobileAppOrderByWithRelationInput
     sections?: SectionOrderByRelationAggregateInput
     subPages?: PageOrderByRelationAggregateInput
     parentPage?: PageOrderByWithRelationInput
-    mobileApp?: MobileAppOrderByWithRelationInput
     _relevance?: PageOrderByRelevanceInput
   }
 
@@ -19405,19 +19424,19 @@ export namespace Prisma {
     title?: StringFilter<"Page"> | string
     slug?: StringFilter<"Page"> | string
     projectId?: IntFilter<"Page"> | number
-    siteId?: IntFilter<"Page"> | number
+    siteId?: IntNullableFilter<"Page"> | number | null
+    mobileAppId?: IntNullableFilter<"Page"> | number | null
     parentId?: IntNullableFilter<"Page"> | number | null
     metaTitle?: StringNullableFilter<"Page"> | string | null
     metaDescription?: StringNullableFilter<"Page"> | string | null
     ogImage?: StringNullableFilter<"Page"> | string | null
     keywords?: StringNullableFilter<"Page"> | string | null
-    mobileAppId?: IntNullableFilter<"Page"> | number | null
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
-    site?: XOR<SiteScalarRelationFilter, SiteWhereInput>
+    site?: XOR<SiteNullableScalarRelationFilter, SiteWhereInput> | null
+    mobileApp?: XOR<MobileAppNullableScalarRelationFilter, MobileAppWhereInput> | null
     sections?: SectionListRelationFilter
     subPages?: PageListRelationFilter
     parentPage?: XOR<PageNullableScalarRelationFilter, PageWhereInput> | null
-    mobileApp?: XOR<MobileAppNullableScalarRelationFilter, MobileAppWhereInput> | null
   }, "id" | "slug_projectId">
 
   export type PageOrderByWithAggregationInput = {
@@ -19425,13 +19444,13 @@ export namespace Prisma {
     title?: SortOrder
     slug?: SortOrder
     projectId?: SortOrder
-    siteId?: SortOrder
+    siteId?: SortOrderInput | SortOrder
+    mobileAppId?: SortOrderInput | SortOrder
     parentId?: SortOrderInput | SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDescription?: SortOrderInput | SortOrder
     ogImage?: SortOrderInput | SortOrder
     keywords?: SortOrderInput | SortOrder
-    mobileAppId?: SortOrderInput | SortOrder
     _count?: PageCountOrderByAggregateInput
     _avg?: PageAvgOrderByAggregateInput
     _max?: PageMaxOrderByAggregateInput
@@ -19447,13 +19466,13 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Page"> | string
     slug?: StringWithAggregatesFilter<"Page"> | string
     projectId?: IntWithAggregatesFilter<"Page"> | number
-    siteId?: IntWithAggregatesFilter<"Page"> | number
+    siteId?: IntNullableWithAggregatesFilter<"Page"> | number | null
+    mobileAppId?: IntNullableWithAggregatesFilter<"Page"> | number | null
     parentId?: IntNullableWithAggregatesFilter<"Page"> | number | null
     metaTitle?: StringNullableWithAggregatesFilter<"Page"> | string | null
     metaDescription?: StringNullableWithAggregatesFilter<"Page"> | string | null
     ogImage?: StringNullableWithAggregatesFilter<"Page"> | string | null
     keywords?: StringNullableWithAggregatesFilter<"Page"> | string | null
-    mobileAppId?: IntNullableWithAggregatesFilter<"Page"> | number | null
   }
 
   export type SectionWhereInput = {
@@ -20603,11 +20622,11 @@ export namespace Prisma {
     ogImage?: string | null
     keywords?: string | null
     project: ProjectCreateNestedOneWithoutPagesInput
-    site: SiteCreateNestedOneWithoutPagesInput
+    site?: SiteCreateNestedOneWithoutPagesInput
+    mobileApp?: MobileAppCreateNestedOneWithoutPagesInput
     sections?: SectionCreateNestedManyWithoutPageInput
     subPages?: PageCreateNestedManyWithoutParentPageInput
     parentPage?: PageCreateNestedOneWithoutSubPagesInput
-    mobileApp?: MobileAppCreateNestedOneWithoutPagesInput
   }
 
   export type PageUncheckedCreateInput = {
@@ -20615,13 +20634,13 @@ export namespace Prisma {
     title: string
     slug: string
     projectId: number
-    siteId: number
+    siteId?: number | null
+    mobileAppId?: number | null
     parentId?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
     keywords?: string | null
-    mobileAppId?: number | null
     sections?: SectionUncheckedCreateNestedManyWithoutPageInput
     subPages?: PageUncheckedCreateNestedManyWithoutParentPageInput
   }
@@ -20634,11 +20653,11 @@ export namespace Prisma {
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
     project?: ProjectUpdateOneRequiredWithoutPagesNestedInput
-    site?: SiteUpdateOneRequiredWithoutPagesNestedInput
+    site?: SiteUpdateOneWithoutPagesNestedInput
+    mobileApp?: MobileAppUpdateOneWithoutPagesNestedInput
     sections?: SectionUpdateManyWithoutPageNestedInput
     subPages?: PageUpdateManyWithoutParentPageNestedInput
     parentPage?: PageUpdateOneWithoutSubPagesNestedInput
-    mobileApp?: MobileAppUpdateOneWithoutPagesNestedInput
   }
 
   export type PageUncheckedUpdateInput = {
@@ -20646,13 +20665,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     projectId?: IntFieldUpdateOperationsInput | number
-    siteId?: IntFieldUpdateOperationsInput | number
+    siteId?: NullableIntFieldUpdateOperationsInput | number | null
+    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
-    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     sections?: SectionUncheckedUpdateManyWithoutPageNestedInput
     subPages?: PageUncheckedUpdateManyWithoutParentPageNestedInput
   }
@@ -20662,13 +20681,13 @@ export namespace Prisma {
     title: string
     slug: string
     projectId: number
-    siteId: number
+    siteId?: number | null
+    mobileAppId?: number | null
     parentId?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
     keywords?: string | null
-    mobileAppId?: number | null
   }
 
   export type PageUpdateManyMutationInput = {
@@ -20685,13 +20704,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     projectId?: IntFieldUpdateOperationsInput | number
-    siteId?: IntFieldUpdateOperationsInput | number
+    siteId?: NullableIntFieldUpdateOperationsInput | number | null
+    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
-    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SectionCreateInput = {
@@ -21962,9 +21981,14 @@ export namespace Prisma {
     isNot?: ProjectWhereInput
   }
 
-  export type SiteScalarRelationFilter = {
-    is?: SiteWhereInput
-    isNot?: SiteWhereInput
+  export type SiteNullableScalarRelationFilter = {
+    is?: SiteWhereInput | null
+    isNot?: SiteWhereInput | null
+  }
+
+  export type MobileAppNullableScalarRelationFilter = {
+    is?: MobileAppWhereInput | null
+    isNot?: MobileAppWhereInput | null
   }
 
   export type SectionListRelationFilter = {
@@ -21982,11 +22006,6 @@ export namespace Prisma {
   export type PageNullableScalarRelationFilter = {
     is?: PageWhereInput | null
     isNot?: PageWhereInput | null
-  }
-
-  export type MobileAppNullableScalarRelationFilter = {
-    is?: MobileAppWhereInput | null
-    isNot?: MobileAppWhereInput | null
   }
 
   export type SectionOrderByRelationAggregateInput = {
@@ -22014,20 +22033,20 @@ export namespace Prisma {
     slug?: SortOrder
     projectId?: SortOrder
     siteId?: SortOrder
+    mobileAppId?: SortOrder
     parentId?: SortOrder
     metaTitle?: SortOrder
     metaDescription?: SortOrder
     ogImage?: SortOrder
     keywords?: SortOrder
-    mobileAppId?: SortOrder
   }
 
   export type PageAvgOrderByAggregateInput = {
     id?: SortOrder
     projectId?: SortOrder
     siteId?: SortOrder
-    parentId?: SortOrder
     mobileAppId?: SortOrder
+    parentId?: SortOrder
   }
 
   export type PageMaxOrderByAggregateInput = {
@@ -22036,12 +22055,12 @@ export namespace Prisma {
     slug?: SortOrder
     projectId?: SortOrder
     siteId?: SortOrder
+    mobileAppId?: SortOrder
     parentId?: SortOrder
     metaTitle?: SortOrder
     metaDescription?: SortOrder
     ogImage?: SortOrder
     keywords?: SortOrder
-    mobileAppId?: SortOrder
   }
 
   export type PageMinOrderByAggregateInput = {
@@ -22050,20 +22069,20 @@ export namespace Prisma {
     slug?: SortOrder
     projectId?: SortOrder
     siteId?: SortOrder
+    mobileAppId?: SortOrder
     parentId?: SortOrder
     metaTitle?: SortOrder
     metaDescription?: SortOrder
     ogImage?: SortOrder
     keywords?: SortOrder
-    mobileAppId?: SortOrder
   }
 
   export type PageSumOrderByAggregateInput = {
     id?: SortOrder
     projectId?: SortOrder
     siteId?: SortOrder
-    parentId?: SortOrder
     mobileAppId?: SortOrder
+    parentId?: SortOrder
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -23344,6 +23363,12 @@ export namespace Prisma {
     connect?: SiteWhereUniqueInput
   }
 
+  export type MobileAppCreateNestedOneWithoutPagesInput = {
+    create?: XOR<MobileAppCreateWithoutPagesInput, MobileAppUncheckedCreateWithoutPagesInput>
+    connectOrCreate?: MobileAppCreateOrConnectWithoutPagesInput
+    connect?: MobileAppWhereUniqueInput
+  }
+
   export type SectionCreateNestedManyWithoutPageInput = {
     create?: XOR<SectionCreateWithoutPageInput, SectionUncheckedCreateWithoutPageInput> | SectionCreateWithoutPageInput[] | SectionUncheckedCreateWithoutPageInput[]
     connectOrCreate?: SectionCreateOrConnectWithoutPageInput | SectionCreateOrConnectWithoutPageInput[]
@@ -23362,12 +23387,6 @@ export namespace Prisma {
     create?: XOR<PageCreateWithoutSubPagesInput, PageUncheckedCreateWithoutSubPagesInput>
     connectOrCreate?: PageCreateOrConnectWithoutSubPagesInput
     connect?: PageWhereUniqueInput
-  }
-
-  export type MobileAppCreateNestedOneWithoutPagesInput = {
-    create?: XOR<MobileAppCreateWithoutPagesInput, MobileAppUncheckedCreateWithoutPagesInput>
-    connectOrCreate?: MobileAppCreateOrConnectWithoutPagesInput
-    connect?: MobileAppWhereUniqueInput
   }
 
   export type SectionUncheckedCreateNestedManyWithoutPageInput = {
@@ -23392,12 +23411,24 @@ export namespace Prisma {
     update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutPagesInput, ProjectUpdateWithoutPagesInput>, ProjectUncheckedUpdateWithoutPagesInput>
   }
 
-  export type SiteUpdateOneRequiredWithoutPagesNestedInput = {
+  export type SiteUpdateOneWithoutPagesNestedInput = {
     create?: XOR<SiteCreateWithoutPagesInput, SiteUncheckedCreateWithoutPagesInput>
     connectOrCreate?: SiteCreateOrConnectWithoutPagesInput
     upsert?: SiteUpsertWithoutPagesInput
+    disconnect?: SiteWhereInput | boolean
+    delete?: SiteWhereInput | boolean
     connect?: SiteWhereUniqueInput
     update?: XOR<XOR<SiteUpdateToOneWithWhereWithoutPagesInput, SiteUpdateWithoutPagesInput>, SiteUncheckedUpdateWithoutPagesInput>
+  }
+
+  export type MobileAppUpdateOneWithoutPagesNestedInput = {
+    create?: XOR<MobileAppCreateWithoutPagesInput, MobileAppUncheckedCreateWithoutPagesInput>
+    connectOrCreate?: MobileAppCreateOrConnectWithoutPagesInput
+    upsert?: MobileAppUpsertWithoutPagesInput
+    disconnect?: MobileAppWhereInput | boolean
+    delete?: MobileAppWhereInput | boolean
+    connect?: MobileAppWhereUniqueInput
+    update?: XOR<XOR<MobileAppUpdateToOneWithWhereWithoutPagesInput, MobileAppUpdateWithoutPagesInput>, MobileAppUncheckedUpdateWithoutPagesInput>
   }
 
   export type SectionUpdateManyWithoutPageNestedInput = {
@@ -23436,16 +23467,6 @@ export namespace Prisma {
     delete?: PageWhereInput | boolean
     connect?: PageWhereUniqueInput
     update?: XOR<XOR<PageUpdateToOneWithWhereWithoutSubPagesInput, PageUpdateWithoutSubPagesInput>, PageUncheckedUpdateWithoutSubPagesInput>
-  }
-
-  export type MobileAppUpdateOneWithoutPagesNestedInput = {
-    create?: XOR<MobileAppCreateWithoutPagesInput, MobileAppUncheckedCreateWithoutPagesInput>
-    connectOrCreate?: MobileAppCreateOrConnectWithoutPagesInput
-    upsert?: MobileAppUpsertWithoutPagesInput
-    disconnect?: MobileAppWhereInput | boolean
-    delete?: MobileAppWhereInput | boolean
-    connect?: MobileAppWhereUniqueInput
-    update?: XOR<XOR<MobileAppUpdateToOneWithWhereWithoutPagesInput, MobileAppUpdateWithoutPagesInput>, MobileAppUncheckedUpdateWithoutPagesInput>
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -25304,6 +25325,36 @@ export namespace Prisma {
     create: XOR<SiteCreateWithoutPagesInput, SiteUncheckedCreateWithoutPagesInput>
   }
 
+  export type MobileAppCreateWithoutPagesInput = {
+    name: string
+    slug: string
+    description?: string | null
+    platform?: $Enums.MobileAppPlatform
+    type?: $Enums.MobileAppType
+    category?: $Enums.MobileAppCategory
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project: ProjectCreateNestedOneWithoutMobileAppsInput
+  }
+
+  export type MobileAppUncheckedCreateWithoutPagesInput = {
+    id?: number
+    projectId: number
+    name: string
+    slug: string
+    description?: string | null
+    platform?: $Enums.MobileAppPlatform
+    type?: $Enums.MobileAppType
+    category?: $Enums.MobileAppCategory
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MobileAppCreateOrConnectWithoutPagesInput = {
+    where: MobileAppWhereUniqueInput
+    create: XOR<MobileAppCreateWithoutPagesInput, MobileAppUncheckedCreateWithoutPagesInput>
+  }
+
   export type SectionCreateWithoutPageInput = {
     type: $Enums.SectionType
     name?: string | null
@@ -25349,10 +25400,10 @@ export namespace Prisma {
     ogImage?: string | null
     keywords?: string | null
     project: ProjectCreateNestedOneWithoutPagesInput
-    site: SiteCreateNestedOneWithoutPagesInput
+    site?: SiteCreateNestedOneWithoutPagesInput
+    mobileApp?: MobileAppCreateNestedOneWithoutPagesInput
     sections?: SectionCreateNestedManyWithoutPageInput
     subPages?: PageCreateNestedManyWithoutParentPageInput
-    mobileApp?: MobileAppCreateNestedOneWithoutPagesInput
   }
 
   export type PageUncheckedCreateWithoutParentPageInput = {
@@ -25360,12 +25411,12 @@ export namespace Prisma {
     title: string
     slug: string
     projectId: number
-    siteId: number
+    siteId?: number | null
+    mobileAppId?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
     keywords?: string | null
-    mobileAppId?: number | null
     sections?: SectionUncheckedCreateNestedManyWithoutPageInput
     subPages?: PageUncheckedCreateNestedManyWithoutParentPageInput
   }
@@ -25388,10 +25439,10 @@ export namespace Prisma {
     ogImage?: string | null
     keywords?: string | null
     project: ProjectCreateNestedOneWithoutPagesInput
-    site: SiteCreateNestedOneWithoutPagesInput
+    site?: SiteCreateNestedOneWithoutPagesInput
+    mobileApp?: MobileAppCreateNestedOneWithoutPagesInput
     sections?: SectionCreateNestedManyWithoutPageInput
     parentPage?: PageCreateNestedOneWithoutSubPagesInput
-    mobileApp?: MobileAppCreateNestedOneWithoutPagesInput
   }
 
   export type PageUncheckedCreateWithoutSubPagesInput = {
@@ -25399,49 +25450,19 @@ export namespace Prisma {
     title: string
     slug: string
     projectId: number
-    siteId: number
+    siteId?: number | null
+    mobileAppId?: number | null
     parentId?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
     keywords?: string | null
-    mobileAppId?: number | null
     sections?: SectionUncheckedCreateNestedManyWithoutPageInput
   }
 
   export type PageCreateOrConnectWithoutSubPagesInput = {
     where: PageWhereUniqueInput
     create: XOR<PageCreateWithoutSubPagesInput, PageUncheckedCreateWithoutSubPagesInput>
-  }
-
-  export type MobileAppCreateWithoutPagesInput = {
-    name: string
-    slug: string
-    description?: string | null
-    platform?: $Enums.MobileAppPlatform
-    type?: $Enums.MobileAppType
-    category?: $Enums.MobileAppCategory
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    project: ProjectCreateNestedOneWithoutMobileAppsInput
-  }
-
-  export type MobileAppUncheckedCreateWithoutPagesInput = {
-    id?: number
-    projectId: number
-    name: string
-    slug: string
-    description?: string | null
-    platform?: $Enums.MobileAppPlatform
-    type?: $Enums.MobileAppType
-    category?: $Enums.MobileAppCategory
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type MobileAppCreateOrConnectWithoutPagesInput = {
-    where: MobileAppWhereUniqueInput
-    create: XOR<MobileAppCreateWithoutPagesInput, MobileAppUncheckedCreateWithoutPagesInput>
   }
 
   export type ProjectUpsertWithoutPagesInput = {
@@ -25524,6 +25545,42 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type MobileAppUpsertWithoutPagesInput = {
+    update: XOR<MobileAppUpdateWithoutPagesInput, MobileAppUncheckedUpdateWithoutPagesInput>
+    create: XOR<MobileAppCreateWithoutPagesInput, MobileAppUncheckedCreateWithoutPagesInput>
+    where?: MobileAppWhereInput
+  }
+
+  export type MobileAppUpdateToOneWithWhereWithoutPagesInput = {
+    where?: MobileAppWhereInput
+    data: XOR<MobileAppUpdateWithoutPagesInput, MobileAppUncheckedUpdateWithoutPagesInput>
+  }
+
+  export type MobileAppUpdateWithoutPagesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    platform?: EnumMobileAppPlatformFieldUpdateOperationsInput | $Enums.MobileAppPlatform
+    type?: EnumMobileAppTypeFieldUpdateOperationsInput | $Enums.MobileAppType
+    category?: EnumMobileAppCategoryFieldUpdateOperationsInput | $Enums.MobileAppCategory
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutMobileAppsNestedInput
+  }
+
+  export type MobileAppUncheckedUpdateWithoutPagesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    projectId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    platform?: EnumMobileAppPlatformFieldUpdateOperationsInput | $Enums.MobileAppPlatform
+    type?: EnumMobileAppTypeFieldUpdateOperationsInput | $Enums.MobileAppType
+    category?: EnumMobileAppCategoryFieldUpdateOperationsInput | $Enums.MobileAppCategory
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type SectionUpsertWithWhereUniqueWithoutPageInput = {
     where: SectionWhereUniqueInput
     update: XOR<SectionUpdateWithoutPageInput, SectionUncheckedUpdateWithoutPageInput>
@@ -25580,13 +25637,13 @@ export namespace Prisma {
     title?: StringFilter<"Page"> | string
     slug?: StringFilter<"Page"> | string
     projectId?: IntFilter<"Page"> | number
-    siteId?: IntFilter<"Page"> | number
+    siteId?: IntNullableFilter<"Page"> | number | null
+    mobileAppId?: IntNullableFilter<"Page"> | number | null
     parentId?: IntNullableFilter<"Page"> | number | null
     metaTitle?: StringNullableFilter<"Page"> | string | null
     metaDescription?: StringNullableFilter<"Page"> | string | null
     ogImage?: StringNullableFilter<"Page"> | string | null
     keywords?: StringNullableFilter<"Page"> | string | null
-    mobileAppId?: IntNullableFilter<"Page"> | number | null
   }
 
   export type PageUpsertWithoutSubPagesInput = {
@@ -25608,10 +25665,10 @@ export namespace Prisma {
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
     project?: ProjectUpdateOneRequiredWithoutPagesNestedInput
-    site?: SiteUpdateOneRequiredWithoutPagesNestedInput
+    site?: SiteUpdateOneWithoutPagesNestedInput
+    mobileApp?: MobileAppUpdateOneWithoutPagesNestedInput
     sections?: SectionUpdateManyWithoutPageNestedInput
     parentPage?: PageUpdateOneWithoutSubPagesNestedInput
-    mobileApp?: MobileAppUpdateOneWithoutPagesNestedInput
   }
 
   export type PageUncheckedUpdateWithoutSubPagesInput = {
@@ -25619,50 +25676,14 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     projectId?: IntFieldUpdateOperationsInput | number
-    siteId?: IntFieldUpdateOperationsInput | number
+    siteId?: NullableIntFieldUpdateOperationsInput | number | null
+    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
-    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     sections?: SectionUncheckedUpdateManyWithoutPageNestedInput
-  }
-
-  export type MobileAppUpsertWithoutPagesInput = {
-    update: XOR<MobileAppUpdateWithoutPagesInput, MobileAppUncheckedUpdateWithoutPagesInput>
-    create: XOR<MobileAppCreateWithoutPagesInput, MobileAppUncheckedCreateWithoutPagesInput>
-    where?: MobileAppWhereInput
-  }
-
-  export type MobileAppUpdateToOneWithWhereWithoutPagesInput = {
-    where?: MobileAppWhereInput
-    data: XOR<MobileAppUpdateWithoutPagesInput, MobileAppUncheckedUpdateWithoutPagesInput>
-  }
-
-  export type MobileAppUpdateWithoutPagesInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    platform?: EnumMobileAppPlatformFieldUpdateOperationsInput | $Enums.MobileAppPlatform
-    type?: EnumMobileAppTypeFieldUpdateOperationsInput | $Enums.MobileAppType
-    category?: EnumMobileAppCategoryFieldUpdateOperationsInput | $Enums.MobileAppCategory
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneRequiredWithoutMobileAppsNestedInput
-  }
-
-  export type MobileAppUncheckedUpdateWithoutPagesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    projectId?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    platform?: EnumMobileAppPlatformFieldUpdateOperationsInput | $Enums.MobileAppPlatform
-    type?: EnumMobileAppTypeFieldUpdateOperationsInput | $Enums.MobileAppType
-    category?: EnumMobileAppCategoryFieldUpdateOperationsInput | $Enums.MobileAppCategory
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SectionContentCreateWithoutSectionInput = {
@@ -25698,10 +25719,10 @@ export namespace Prisma {
     ogImage?: string | null
     keywords?: string | null
     project: ProjectCreateNestedOneWithoutPagesInput
-    site: SiteCreateNestedOneWithoutPagesInput
+    site?: SiteCreateNestedOneWithoutPagesInput
+    mobileApp?: MobileAppCreateNestedOneWithoutPagesInput
     subPages?: PageCreateNestedManyWithoutParentPageInput
     parentPage?: PageCreateNestedOneWithoutSubPagesInput
-    mobileApp?: MobileAppCreateNestedOneWithoutPagesInput
   }
 
   export type PageUncheckedCreateWithoutSectionsInput = {
@@ -25709,13 +25730,13 @@ export namespace Prisma {
     title: string
     slug: string
     projectId: number
-    siteId: number
+    siteId?: number | null
+    mobileAppId?: number | null
     parentId?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
     keywords?: string | null
-    mobileAppId?: number | null
     subPages?: PageUncheckedCreateNestedManyWithoutParentPageInput
   }
 
@@ -25840,10 +25861,10 @@ export namespace Prisma {
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
     project?: ProjectUpdateOneRequiredWithoutPagesNestedInput
-    site?: SiteUpdateOneRequiredWithoutPagesNestedInput
+    site?: SiteUpdateOneWithoutPagesNestedInput
+    mobileApp?: MobileAppUpdateOneWithoutPagesNestedInput
     subPages?: PageUpdateManyWithoutParentPageNestedInput
     parentPage?: PageUpdateOneWithoutSubPagesNestedInput
-    mobileApp?: MobileAppUpdateOneWithoutPagesNestedInput
   }
 
   export type PageUncheckedUpdateWithoutSectionsInput = {
@@ -25851,13 +25872,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     projectId?: IntFieldUpdateOperationsInput | number
-    siteId?: IntFieldUpdateOperationsInput | number
+    siteId?: NullableIntFieldUpdateOperationsInput | number | null
+    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
-    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     subPages?: PageUncheckedUpdateManyWithoutParentPageNestedInput
   }
 
@@ -27310,24 +27331,24 @@ export namespace Prisma {
     metaDescription?: string | null
     ogImage?: string | null
     keywords?: string | null
-    site: SiteCreateNestedOneWithoutPagesInput
+    site?: SiteCreateNestedOneWithoutPagesInput
+    mobileApp?: MobileAppCreateNestedOneWithoutPagesInput
     sections?: SectionCreateNestedManyWithoutPageInput
     subPages?: PageCreateNestedManyWithoutParentPageInput
     parentPage?: PageCreateNestedOneWithoutSubPagesInput
-    mobileApp?: MobileAppCreateNestedOneWithoutPagesInput
   }
 
   export type PageUncheckedCreateWithoutProjectInput = {
     id?: number
     title: string
     slug: string
-    siteId: number
+    siteId?: number | null
+    mobileAppId?: number | null
     parentId?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
     keywords?: string | null
-    mobileAppId?: number | null
     sections?: SectionUncheckedCreateNestedManyWithoutPageInput
     subPages?: PageUncheckedCreateNestedManyWithoutParentPageInput
   }
@@ -27605,10 +27626,10 @@ export namespace Prisma {
     ogImage?: string | null
     keywords?: string | null
     project: ProjectCreateNestedOneWithoutPagesInput
+    mobileApp?: MobileAppCreateNestedOneWithoutPagesInput
     sections?: SectionCreateNestedManyWithoutPageInput
     subPages?: PageCreateNestedManyWithoutParentPageInput
     parentPage?: PageCreateNestedOneWithoutSubPagesInput
-    mobileApp?: MobileAppCreateNestedOneWithoutPagesInput
   }
 
   export type PageUncheckedCreateWithoutSiteInput = {
@@ -27616,12 +27637,12 @@ export namespace Prisma {
     title: string
     slug: string
     projectId: number
+    mobileAppId?: number | null
     parentId?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
     keywords?: string | null
-    mobileAppId?: number | null
     sections?: SectionUncheckedCreateNestedManyWithoutPageInput
     subPages?: PageUncheckedCreateNestedManyWithoutParentPageInput
   }
@@ -27742,7 +27763,7 @@ export namespace Prisma {
     ogImage?: string | null
     keywords?: string | null
     project: ProjectCreateNestedOneWithoutPagesInput
-    site: SiteCreateNestedOneWithoutPagesInput
+    site?: SiteCreateNestedOneWithoutPagesInput
     sections?: SectionCreateNestedManyWithoutPageInput
     subPages?: PageCreateNestedManyWithoutParentPageInput
     parentPage?: PageCreateNestedOneWithoutSubPagesInput
@@ -27753,7 +27774,7 @@ export namespace Prisma {
     title: string
     slug: string
     projectId: number
-    siteId: number
+    siteId?: number | null
     parentId?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
@@ -28121,12 +28142,12 @@ export namespace Prisma {
     title: string
     slug: string
     projectId: number
-    siteId: number
+    siteId?: number | null
+    mobileAppId?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
     keywords?: string | null
-    mobileAppId?: number | null
   }
 
   export type SectionUpdateWithoutPageInput = {
@@ -28176,10 +28197,10 @@ export namespace Prisma {
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
     project?: ProjectUpdateOneRequiredWithoutPagesNestedInput
-    site?: SiteUpdateOneRequiredWithoutPagesNestedInput
+    site?: SiteUpdateOneWithoutPagesNestedInput
+    mobileApp?: MobileAppUpdateOneWithoutPagesNestedInput
     sections?: SectionUpdateManyWithoutPageNestedInput
     subPages?: PageUpdateManyWithoutParentPageNestedInput
-    mobileApp?: MobileAppUpdateOneWithoutPagesNestedInput
   }
 
   export type PageUncheckedUpdateWithoutParentPageInput = {
@@ -28187,12 +28208,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     projectId?: IntFieldUpdateOperationsInput | number
-    siteId?: IntFieldUpdateOperationsInput | number
+    siteId?: NullableIntFieldUpdateOperationsInput | number | null
+    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
-    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     sections?: SectionUncheckedUpdateManyWithoutPageNestedInput
     subPages?: PageUncheckedUpdateManyWithoutParentPageNestedInput
   }
@@ -28202,12 +28223,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     projectId?: IntFieldUpdateOperationsInput | number
-    siteId?: IntFieldUpdateOperationsInput | number
+    siteId?: NullableIntFieldUpdateOperationsInput | number | null
+    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
-    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SectionContentCreateManySectionInput = {
@@ -28581,13 +28602,13 @@ export namespace Prisma {
     id?: number
     title: string
     slug: string
-    siteId: number
+    siteId?: number | null
+    mobileAppId?: number | null
     parentId?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
     keywords?: string | null
-    mobileAppId?: number | null
   }
 
   export type ContentCreateManyProjectInput = {
@@ -28765,24 +28786,24 @@ export namespace Prisma {
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
-    site?: SiteUpdateOneRequiredWithoutPagesNestedInput
+    site?: SiteUpdateOneWithoutPagesNestedInput
+    mobileApp?: MobileAppUpdateOneWithoutPagesNestedInput
     sections?: SectionUpdateManyWithoutPageNestedInput
     subPages?: PageUpdateManyWithoutParentPageNestedInput
     parentPage?: PageUpdateOneWithoutSubPagesNestedInput
-    mobileApp?: MobileAppUpdateOneWithoutPagesNestedInput
   }
 
   export type PageUncheckedUpdateWithoutProjectInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    siteId?: IntFieldUpdateOperationsInput | number
+    siteId?: NullableIntFieldUpdateOperationsInput | number | null
+    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
-    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     sections?: SectionUncheckedUpdateManyWithoutPageNestedInput
     subPages?: PageUncheckedUpdateManyWithoutParentPageNestedInput
   }
@@ -28791,13 +28812,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    siteId?: IntFieldUpdateOperationsInput | number
+    siteId?: NullableIntFieldUpdateOperationsInput | number | null
+    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
-    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ContentUpdateWithoutProjectInput = {
@@ -28846,12 +28867,12 @@ export namespace Prisma {
     title: string
     slug: string
     projectId: number
+    mobileAppId?: number | null
     parentId?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
     keywords?: string | null
-    mobileAppId?: number | null
   }
 
   export type PageUpdateWithoutSiteInput = {
@@ -28862,10 +28883,10 @@ export namespace Prisma {
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
     project?: ProjectUpdateOneRequiredWithoutPagesNestedInput
+    mobileApp?: MobileAppUpdateOneWithoutPagesNestedInput
     sections?: SectionUpdateManyWithoutPageNestedInput
     subPages?: PageUpdateManyWithoutParentPageNestedInput
     parentPage?: PageUpdateOneWithoutSubPagesNestedInput
-    mobileApp?: MobileAppUpdateOneWithoutPagesNestedInput
   }
 
   export type PageUncheckedUpdateWithoutSiteInput = {
@@ -28873,12 +28894,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     projectId?: IntFieldUpdateOperationsInput | number
+    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
-    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     sections?: SectionUncheckedUpdateManyWithoutPageNestedInput
     subPages?: PageUncheckedUpdateManyWithoutParentPageNestedInput
   }
@@ -28888,12 +28909,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     projectId?: IntFieldUpdateOperationsInput | number
+    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
-    mobileAppId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PageCreateManyMobileAppInput = {
@@ -28901,7 +28922,7 @@ export namespace Prisma {
     title: string
     slug: string
     projectId: number
-    siteId: number
+    siteId?: number | null
     parentId?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
@@ -28917,7 +28938,7 @@ export namespace Prisma {
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     keywords?: NullableStringFieldUpdateOperationsInput | string | null
     project?: ProjectUpdateOneRequiredWithoutPagesNestedInput
-    site?: SiteUpdateOneRequiredWithoutPagesNestedInput
+    site?: SiteUpdateOneWithoutPagesNestedInput
     sections?: SectionUpdateManyWithoutPageNestedInput
     subPages?: PageUpdateManyWithoutParentPageNestedInput
     parentPage?: PageUpdateOneWithoutSubPagesNestedInput
@@ -28928,7 +28949,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     projectId?: IntFieldUpdateOperationsInput | number
-    siteId?: IntFieldUpdateOperationsInput | number
+    siteId?: NullableIntFieldUpdateOperationsInput | number | null
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28943,7 +28964,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     projectId?: IntFieldUpdateOperationsInput | number
-    siteId?: IntFieldUpdateOperationsInput | number
+    siteId?: NullableIntFieldUpdateOperationsInput | number | null
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null

@@ -1,8 +1,11 @@
 import { writeFileSync } from 'fs';
 import { resolve } from 'path';
+import { fileURLToPath } from 'url';
 import { printSchema, lexicographicSortSchema } from 'graphql';
 import { schema } from './schema';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = resolve(__filename, '..');
 
 const sortedSchema = lexicographicSortSchema(schema);
 const schemaString = printSchema(sortedSchema);

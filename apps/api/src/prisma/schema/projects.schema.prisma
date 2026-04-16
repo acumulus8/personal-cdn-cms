@@ -63,8 +63,8 @@ model MobileApp {
   project     Project           @relation(fields: [projectId], references: [id])
   name        String
   slug        String            @unique
-  description String?
   pages       Page[]
+  description String?
   platform    MobileAppPlatform @default(ANDROID)
   type        MobileAppType     @default(PORTFOLIO)
   category    MobileAppCategory @default(GAMES)

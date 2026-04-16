@@ -1,6 +1,7 @@
 import { GraphQLError } from 'graphql';
 import { ContentState, ContentVisibility } from '@prisma/client';
 import { builder } from '../builder';
+import { ContentStateEnum, ContentVisibilityEnum } from './content.resolver';
 import { prisma } from '@/prisma';
 
 builder.prismaObject('ContentVersion', {
@@ -57,8 +58,8 @@ const CreateContentVersionInput = builder.inputType('CreateContentVersionInput',
         title: t.string({ required: false }),
         excerpt: t.string({ required: false }),
         body: t.string({ required: false }),
-        state: t.field({ type: 'ContentState', required: false }),
-        visibility: t.field({ type: 'ContentVisibility', required: false }),
+        state: t.field({ type: ContentStateEnum, required: false }),
+        visibility: t.field({ type: ContentVisibilityEnum, required: false }),
     }),
 });
 
@@ -67,8 +68,8 @@ const UpdateContentVersionInput = builder.inputType('UpdateContentVersionInput',
         title: t.string({ required: false }),
         excerpt: t.string({ required: false }),
         body: t.string({ required: false }),
-        state: t.field({ type: 'ContentState', required: false }),
-        visibility: t.field({ type: 'ContentVisibility', required: false }),
+        state: t.field({ type: ContentStateEnum, required: false }),
+        visibility: t.field({ type: ContentVisibilityEnum, required: false }),
     }),
 });
 

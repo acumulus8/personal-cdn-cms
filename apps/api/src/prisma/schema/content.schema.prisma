@@ -1,11 +1,15 @@
 model Page {
-  id        Int     @id @default(autoincrement())
-  title     String
-  slug      String // e.g., "about-me"
-  projectId Int
-  project   Project @relation(fields: [projectId], references: [id])
-  siteId    Int
-  site      Site    @relation(fields: [siteId], references: [id])
+  id    Int    @id @default(autoincrement())
+  title String
+  slug  String // e.g., "about-me"
+
+  // Relations
+  projectId   Int
+  project     Project    @relation(fields: [projectId], references: [id])
+  siteId      Int?
+  site        Site?      @relation(fields: [siteId], references: [id])
+  mobileAppId Int?
+  mobileApp   MobileApp? @relation(fields: [mobileAppId], references: [id])
 
   // Sections and Sub and Parent Pages relationships
   sections   Section[]
@@ -13,13 +17,13 @@ model Page {
   parentId   Int?
   parentPage Page?     @relation("SubPages", fields: [parentId], references: [id])
 
-  // SEO Fields 
+  // SEO Fields
   metaTitle       String?
   metaDescription String?
   ogImage         String?
   keywords        String?
-  mobileAppId     Int?
-  mobileApp       MobileApp? @relation(fields: [mobileAppId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
 
   @@unique([slug, projectId]) // Ensures "home" can exist on both sites
 }
@@ -107,8 +111,8 @@ model Content {
   visibility ContentVisibility @default(HIDDEN)
 
   // Core metadata
-  slug  String? // URL friendly identifier
-  title String? // Display title
+  slug  String?
+  title String?
 
   projectId Int
   project   Project @relation(fields: [projectId], references: [id])

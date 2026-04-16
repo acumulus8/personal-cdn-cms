@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
+    "check-types": "tsc --noEmit",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "codegen": "graphql-codegen",
+    "codegen:watch": "graphql-codegen --watch"
   },
   "dependencies": {
     "@apollo/client": "^4.1.7",
@@ -16,11 +19,19 @@
     "graphql": "^16.13.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-hook-form": "^7.72.1",
+    "react-router": "^7.14.1",
     "rxjs": "^7.8.2",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
+    "@graphql-codegen/cli": "^6.3.0",
+    "@graphql-codegen/client-preset": "^5.3.0",
+    "@graphql-codegen/typescript": "^5.0.10",
+    "@graphql-codegen/typescript-operations": "^5.1.0",
+    "@graphql-codegen/typescript-react-apollo": "^4.4.1",
+    "@parcel/watcher": "^2.5.6",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
